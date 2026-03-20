@@ -35,6 +35,5 @@ spec:
         kubernetes.io/hostname: mx6qmpic
       containers:
       - name: apollo
-        image: busybox
-        command: ["sh", "-c", "echo 'To inifinty and beyond!' && sleep infinity"]
+        image: loulou3333444/apollo:latest
 
