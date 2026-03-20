@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: landing-moon
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: landing-moon
+  template:
+    metadata:
+      labels:
+        app: landing-moon
+    spec:
+      containers:
+      - name: landing-moon
+        image: busybox
+        command: ["sh", "-c", "echo 'One small step for man, but a giant leap of the project!' && sleep infinity"]
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: apollo
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: apollo
+  template:
+    metadata:
+      labels:
+        app: apollo
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: mx6qmpic
+      containers:
+      - name: apollo
+        image: loulou3333444/apollo:latest
+        # image: busybox
+        # command: ["sh", "-c", "echo 'To inifinty and beyond!' && sleep infinity"]
