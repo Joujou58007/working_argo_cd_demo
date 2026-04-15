@@ -48,7 +48,7 @@ spec:
         kubernetes.io/hostname: mx6qmpic
       containers:
       - name: apollo
-        image: docker.io/loulou3333444/apollo@sha256:9275c0f797a9b75a9bda8a5e5210a17770968d0ee9830ccad716e978a663de7f
+        image: docker.io/loulou3333444/apollo@sha256:a52e5c1392664940bac126df816cdc3a22d902f3e6815a803ebd0c0e70b54466
         imagePullPolicy: Always
       #   securityContext:
       #     privileged: true
