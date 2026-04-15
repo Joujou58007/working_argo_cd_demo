@@ -50,13 +50,13 @@ spec:
       - name: apollo
         image: docker.io/loulou3333444/fpga_container@sha256:b8cb056f910d847885f7185339b7a1d0f52f127a516685d6ed647a3e0bc85393
         imagePullPolicy: Always
-      #   securityContext:
-      #     privileged: true
-      #   volumeMounts:
-      #   - mountPath: /dev/spidev0.0
-      #     name: spidev
-      # volumes:
-      # - name: spidev
-      #   hostPath:
-      #     path: /dev/spidev0.0
-      #     type: CharDevice
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /dev/spidev0.0
+          name: spidev
+      volumes:
+      - name: spidev
+        hostPath:
+          path: /dev/spidev0.0
+          type: CharDevice
