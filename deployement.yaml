@@ -1,3 +1,16 @@
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: flannel-node-list-fix
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: system:node
+# subjects:
+# - kind: Group
+#   name: system:nodes
+#   apiGroup: rbac.authorization.k8s.io
+# ---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -35,5 +48,15 @@ spec:
         kubernetes.io/hostname: mx6qmpic
       containers:
       - name: apollo
-        image: loulou3333444/apollo:latest
-
+        image: docker.io/loulou3333444/apollo@sha256:12edcd345df8e0e038245f703404e171a22686a5e9f992dc98c7846a736a5eb6
+        imagePullPolicy: Always
+      #   securityContext:
+      #     privileged: true
+      #   volumeMounts:
+      #   - mountPath: /dev/spidev0.0
+      #     name: spidev
+      # volumes:
+      # - name: spidev
+      #   hostPath:
+      #     path: /dev/spidev0.0
+      #     type: CharDevice
