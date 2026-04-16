@@ -13,7 +13,7 @@ spec:
         app: apollo
     spec:
       nodeSelector:
-        kubernetes.io/hostname: mx6qmpic
+        kubernetes.io/hostname: spi-mpic
       containers:
       - name: apollo
         image: docker.io/loulou3333444/docker.io/loulou3333444/apollo@sha256:189f3a9ab3395011f1a65fb4d754f8b2846cd2990d88b33231c7b9e62ddb68da
