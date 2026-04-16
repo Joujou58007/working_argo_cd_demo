@@ -16,7 +16,7 @@ spec:
         kubernetes.io/hostname: spi-mpic
       containers:
       - name: apollo
-        image: sha256:ce41b0534e91e9988b666cddc55c2f33067de70bc1f9f12948e05418246ae80a
+        image: docker.io/loulou3333444/apollo@sha256:189f3a9ab3395011f1a65fb4d754f8b2846cd2990d88b33231c7b9e62ddb68da
         imagePullPolicy: Always
         securityContext:
           privileged: true
