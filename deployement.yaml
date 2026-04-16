@@ -1,35 +1,3 @@
-# apiVersion: rbac.authorization.k8s.io/v1
-# kind: ClusterRoleBinding
-# metadata:
-#   name: flannel-node-list-fix
-# roleRef:
-#   apiGroup: rbac.authorization.k8s.io
-#   kind: ClusterRole
-#   name: system:node
-# subjects:
-# - kind: Group
-#   name: system:nodes
-#   apiGroup: rbac.authorization.k8s.io
-# ---
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: landing-moon
-  namespace: default
-spec:
-  selector:
-    matchLabels:
-      app: landing-moon
-  template:
-    metadata:
-      labels:
-        app: landing-moon
-    spec:
-      containers:
-      - name: landing-moon
-        image: busybox
-        command: ["sh", "-c", "echo 'One small step for man, but a giant leap of the project!' && sleep infinity"]
----
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -48,16 +16,16 @@ spec:
         kubernetes.io/hostname: mx6qmpic
       containers:
       - name: apollo
-        image: docker.io/loulou3333444/fpga_container@sha256:ce41b0534e91e9988b666cddc55c2f33067de70bc1f9f12948e05418246ae80a
+        image: docker.io/loulou3333444/docker.io/loulou3333444/apollo@sha256:189f3a9ab3395011f1a65fb4d754f8b2846cd2990d88b33231c7b9e62ddb68da
         imagePullPolicy: Always
         securityContext:
           privileged: true
           runAsUser: 0
         volumeMounts:
-        - mountPath: /dev/spidev1.0
+        - mountPath: /dev/spidev.0
           name: spidev
       volumes:
       - name: spidev
         hostPath:
-          path: /dev/spidev1.0
+          path: /dev/spidev0.0
           type: CharDevice
