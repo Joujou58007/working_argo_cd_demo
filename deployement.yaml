@@ -68,7 +68,7 @@ spec:
       - name: dev
         hostPath: { path: /dev }
       restartPolicy: Never
-    backoffLimit: 0
+  backoffLimit: 0
 ---
 apiVersion: apps/v1
 kind: DaemonSet
