@@ -21,6 +21,11 @@ spec:
                 operator: In
                 values:
                 - spi-mpic
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - mx6qmpic
       containers:
       - name: apollo
         image: docker.io/loulou3333444/apollo@sha256:b938ae7cf326a8888db713c886c6e3fb5b6537c66609de96ab96e31b5c95aeb3
