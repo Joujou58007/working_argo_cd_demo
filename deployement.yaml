@@ -53,7 +53,7 @@ spec:
         kubernetes.io/hostname: mx6qmpic
       containers:
       - name: xeno
-        image: docker.io/loulou3333444/clock-test@sha256:00d347ea21cdbb8e8acf4dbac45058115dd4a55f531005759f578b682b2ed421
+        image: docker.io/loulou3333444/clock-test@sha256:0a6e5ffa5e59800cb32097bf5360d14e72da65631ca4ba3caed8ee0b1be391d2
         imagePullPolicy: Always
         securityContext:
           privileged: true
