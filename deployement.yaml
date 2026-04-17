@@ -28,7 +28,7 @@ spec:
                 - mx6qmpic
       containers:
       - name: apollo
-        image: docker.io/loulou3333444/apollo@sha256:7bab510ac4d254652bbf08edb12bdfb0ebeb51b6418a2b4ba51eceadbeecbfb3
+        image: docker.io/loulou3333444/apollo@sha256:b938ae7cf326a8888db713c886c6e3fb5b6537c66609de96ab96e31b5c95aeb3
         imagePullPolicy: Always
         securityContext:
           privileged: true
