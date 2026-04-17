@@ -59,10 +59,13 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: latency-test
+  name: latency-idle
   namespace: default
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
 spec:
   backoffLimit: 0
+  ttlSecondsAfterFinished: 300
   template:
     spec:
       nodeSelector:
