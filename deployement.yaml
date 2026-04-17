@@ -9,15 +9,15 @@ spec:
   selector:
     matchLabels:
       app: apollo
-      hostname: mx6qmpic
+      hostname: test-port
   template:
     metadata:
       labels:
         app: apollo
-        hostname: mx6qmpic
+        hostname: test-port
     spec:
       nodeSelector:
-        kubernetes.io/hostname: mx6qmpic
+        kubernetes.io/hostname: test-port
       containers:
       - name: apollo
         image: docker.io/loulou3333444/fpga_container@sha256:c84376c31ad2f0b8115d6c87d693a168af5a55c9921405c7aa86b61e337d777b
