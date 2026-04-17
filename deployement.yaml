@@ -62,13 +62,13 @@ spec:
           mountPath: /hostroot
         - name: dev
           mountPath: /dev
-        volumes:
-        - name: hostroot
-          hostPath: { path: / }
-        - name: dev
-          hostPath: { path: /dev }
-        restartPolicy: Never
-    backoffLimit: 0
+      volumes:
+      - name: hostroot
+        hostPath: { path: / }
+      - name: dev
+        hostPath: { path: /dev }
+      restartPolicy: Never
+  backoffLimit: 0
 ---
 apiVersion: apps/v1
 kind: DaemonSet
