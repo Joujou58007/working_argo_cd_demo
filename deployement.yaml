@@ -1,22 +1,23 @@
 ---
+# Standerd Continer with FPGA test
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: apollo-spi-mpic
+  name: apollo
   namespace: default
 spec:
   selector:
     matchLabels:
       app: apollo
-      hostname: spi-mpic
+      hostname: mx6qmpic
   template:
     metadata:
       labels:
         app: apollo
-        hostname: spi-mpic
+        hostname: mx6qmpic
     spec:
       nodeSelector:
-        kubernetes.io/hostname: spi-mpic
+        kubernetes.io/hostname: mx6qmpic
       containers:
       - name: apollo
         image: docker.io/loulou3333444/fpga_container@sha256:c84376c31ad2f0b8115d6c87d693a168af5a55c9921405c7aa86b61e337d777b
@@ -33,6 +34,7 @@ spec:
           path: /dev/spidev0.0
           type: CharDevice
 ---
+# Standard Container for MPIC 2
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -56,43 +58,7 @@ spec:
         image: docker.io/loulou3333444/apollo-mpic2@sha256:b792ec1fbae98ddfcf3a9e57bf753df6530e66eb464f22cd7c66cadaa34ddd2b
         imagePullPolicy: Always
 ---
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: latency-load
-  namespace: default
-  annotations:
-    argocd.argoproj.io/sync-options: Replace=true
-spec:
-  backoffLimit: 0
-  ttlSecondsAfterFinished: 300
-  template:
-    spec:
-      nodeSelector:
-        kubernetes.io/hostname: new-xenomi
-      containers:
-      - name: latency
-        image: arm32v7/debian:bookworm-slim
-        command: ["sh", "-c"]
-        args:
-          - |
-            for i in 1 2 3 4; do yes > /dev/null & done
-            sleep 2
-            chroot /hostroot /usr/bin/latency -T 60 -p 100 -h
-        securityContext:
-          privileged: true
-        volumeMounts:
-        - name: hostroot
-          mountPath: /hostroot
-        - name: dev
-          mountPath: /dev
-      volumes:
-      - name: hostroot
-        hostPath: { path: / }
-      - name: dev
-        hostPath: { path: /dev }
-      restartPolicy: Never
----
+# Container with Xenomai On MPIC 1
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
