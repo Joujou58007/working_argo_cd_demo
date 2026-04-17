@@ -55,17 +55,6 @@ spec:
       - name: apollo-imx8mp-mpic
         image: docker.io/loulou3333444/apollo-mpic2@sha256:b792ec1fbae98ddfcf3a9e57bf753df6530e66eb464f22cd7c66cadaa34ddd2b
         imagePullPolicy: Always
-        securityContext:
-          privileged: true
-          runAsUser: 0
-        volumeMounts:
-        - mountPath: /dev/spidev0.0
-          name: spidev
-      volumes:
-      - name: spidev
-        hostPath:
-          path: /dev/spidev0.0
-          type: CharDevice
 ---
 apiVersion: batch/v1
 kind: Job
