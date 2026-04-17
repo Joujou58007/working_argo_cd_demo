@@ -35,6 +35,40 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
+  name: new-xenomi
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: new-xenomi
+      hostname: spi-mpic
+  template:
+    metadata:
+      labels:
+        app: new-xenomi
+        hostname: spi-mpic
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: new-xenomi
+      containers:
+      - name: new-xenomi
+        image: docker.io/loulou3333444/fpga_container@sha256:c84376c31ad2f0b8115d6c87d693a168af5a55c9921405c7aa86b61e337d777b
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        volumeMounts:
+        - mountPath: /dev/spidev0.0
+          name: spidev
+      volumes:
+      - name: spidev
+        hostPath:
+          path: /dev/spidev0.0
+          type: CharDevice
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
   name: xeno-mx6qmpic
   namespace: default
 spec:
