@@ -20,15 +20,10 @@ spec:
               - key: kubernetes.io/hostname
                 operator: In
                 values:
-                - spi-mpic
-            - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
                 - mx6qmpic
       containers:
       - name: apollo
-        image: docker.io/loulou3333444/apollo@sha256:b938ae7cf326a8888db713c886c6e3fb5b6537c66609de96ab96e31b5c95aeb3
+        image: docker.io/loulou3333444/clock-test@sha256:fac315ec196f6d2f0ff9ceec86fe238cebc0b72be42aecb571f8b206d3beca6e
         imagePullPolicy: Always
         securityContext:
           privileged: true
