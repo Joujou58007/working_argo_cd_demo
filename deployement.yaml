@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -58,18 +57,14 @@ spec:
         securityContext:
           privileged: true
         volumeMounts:
+        - name: hostroot
+          mountPath: /hostroot
         - name: dev
           mountPath: /dev
-        - name: host-usr
-          mountPath: /host/usr
-          readOnly: true
-        - name: host-lib
-          mountPath: /host/lib
-          readOnly: true
       volumes:
+      - name: hostroot
+        hostPath:
+          path: /
       - name: dev
-        hostPath: { path: /dev }
-      - name: host-usr
-        hostPath: { path: /usr }
-      - name: host-lib
-        hostPath: { path: /lib }
+        hostPath:
+          path: /dev
