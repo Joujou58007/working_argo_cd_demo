@@ -59,7 +59,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: latency-idle
+  name: latency-load
   namespace: default
   annotations:
     argocd.argoproj.io/sync-options: Replace=true
@@ -73,8 +73,12 @@ spec:
       containers:
       - name: latency
         image: arm32v7/debian:bookworm-slim
-        command: ["chroot", "/hostroot", "/usr/bin/latency"]
-        args: ["-T", "60", "-p", "100", "-h"]
+        command: ["sh", "-c"]
+        args:
+          - |
+            for i in 1 2 3 4; do yes > /dev/null & done
+            sleep 2
+            chroot /hostroot /usr/bin/latency -T 60 -p 100 -h
         securityContext:
           privileged: true
         volumeMounts:
