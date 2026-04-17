@@ -28,7 +28,7 @@ spec:
                 - mx6qmpic
       containers:
       - name: apollo
-        image: docker.io/loulou3333444/fibonacci_bench@sha256:4c95ccbb0373d303e78c7c1b030efdb304b87c01d686bab672f1e769df13541b
+        image: docker.io/loulou3333444/fibonacci_bench@sha256:7bab510ac4d254652bbf08edb12bdfb0ebeb51b6418a2b4ba51eceadbeecbfb3
         imagePullPolicy: Always
         securityContext:
           privileged: true
