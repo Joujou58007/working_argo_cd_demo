@@ -53,19 +53,23 @@ spec:
         kubernetes.io/hostname: mx6qmpic
       containers:
       - name: xeno
-        image: docker.io/loulou3333444/clock-test@sha256:fc3e53d2aed8a997fd487942f1f0fa848a43749f4505b72dd72a43468e1fb97b
-        imagePullPolicy: Always
+        image: arm32v7/debian:bookworm-slim
+        command: ["sleep", "3600"]
         securityContext:
           privileged: true
         volumeMounts:
         - name: dev
           mountPath: /dev
-        - name: xenomai
-          mountPath: /usr/xenomai
+        - name: host-usr
+          mountPath: /host/usr
+          readOnly: true
+        - name: host-lib
+          mountPath: /host/lib
+          readOnly: true
       volumes:
       - name: dev
-        hostPath:
-          path: /dev
-      - name: xenomai
-        hostPath:
-          path: /usr/xenomai 
+        hostPath: { path: /dev }
+      - name: host-usr
+        hostPath: { path: /usr }
+      - name: host-lib
+        hostPath: { path: /lib }
