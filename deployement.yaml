@@ -25,14 +25,13 @@ spec:
           privileged: true
           runAsUser: 0
         volumeMounts:
-        - mountPath: /dev/spidev.0
+        - mountPath: /dev/spidev0.0
           name: spidev
       volumes:
       - name: spidev
         hostPath:
           path: /dev/spidev0.0
           type: CharDevice
-
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -40,7 +39,6 @@ metadata:
   name: xeno-mx6qmpic
   namespace: default
 spec:
-  hostPID: true
   selector:
     matchLabels:
       app: xeno
@@ -70,5 +68,4 @@ spec:
           path: /dev
       - name: xenomai
         hostPath:
-          path: /usr/xenomai
-      restartPolicy: Never 
+          path: /usr/xenomai 
