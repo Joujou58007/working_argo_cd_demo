@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       app: apollo
-      hostname: test-port
+      hostname: mx6qmpic
   template:
     metadata:
       labels:
         app: apollo
-        hostname: test-port
+        hostname: mx6qmpic
     spec:
       nodeSelector:
         kubernetes.io/hostname: test-port
