@@ -1,29 +1,25 @@
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: apollo
+  name: apollo-spi-mpic
   namespace: default
 spec:
   selector:
     matchLabels:
       app: apollo
+      hostname: spi-mpic
   template:
     metadata:
       labels:
         app: apollo
+        hostname: spi-mpic
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                - mx6qmpic
+      nodeSelector:
+        kubernetes.io/hostname: spi-mpic
       containers:
       - name: apollo
-        image: docker.io/loulou3333444/clock-test@sha256:fac315ec196f6d2f0ff9ceec86fe238cebc0b72be42aecb571f8b206d3beca6e
+        image: docker.io/loulou3333444/apollo@sha256:b938ae7cf326a8888db713c886c6e3fb5b6537c66609de96ab96e31b5c95aeb3
         imagePullPolicy: Always
         securityContext:
           privileged: true
@@ -36,3 +32,43 @@ spec:
         hostPath:
           path: /dev/spidev0.0
           type: CharDevice
+
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: xeno-mx6qmpic
+  namespace: default
+spec:
+  hostPID: true
+  selector:
+    matchLabels:
+      app: xeno
+      hostname: mx6qmpic
+  template:
+    metadata:
+      labels:
+        app: xeno
+        hostname: mx6qmpic
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: mx6qmpic
+      containers:
+      - name: xeno
+        image: docker.io/loulou3333444/clock-test@sha256:00d347ea21cdbb8e8acf4dbac45058115dd4a55f531005759f578b682b2ed421
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: dev
+          mountPath: /dev
+        - name: xenomai
+          mountPath: /usr/xenomai
+      volumes:
+      - name: dev
+        hostPath:
+          path: /dev
+      - name: xenomai
+        hostPath:
+          path: /usr/xenomai
+      restartPolicy: Never 
