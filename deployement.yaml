@@ -1,4 +1,4 @@
-```---
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -98,4 +98,4 @@ spec:
           path: /
       - name: dev
         hostPath:
-          path: /dev```
+          path: /dev
