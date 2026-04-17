@@ -1,3 +1,4 @@
+```---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -32,21 +33,14 @@ spec:
           path: /dev/spidev0.0
           type: CharDevice
 ---
-apiVersion: apps/v1
-kind: DaemonSet
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: new-xenomi
+  name: latency-test
   namespace: default
 spec:
-  selector:
-    matchLabels:
-      app: new-xenomi
-      hostname: new-xenomi
+  backoffLimit: 0
   template:
-    metadata:
-      labels:
-        app: new-xenomi
-        hostname: new-xenomi
     spec:
       nodeSelector:
         kubernetes.io/hostname: new-xenomi
@@ -68,7 +62,6 @@ spec:
       - name: dev
         hostPath: { path: /dev }
       restartPolicy: Never
-  backoffLimit: 0
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -105,4 +98,4 @@ spec:
           path: /
       - name: dev
         hostPath:
-          path: /dev
+          path: /dev```
