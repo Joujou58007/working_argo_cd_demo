@@ -12,8 +12,20 @@ spec:
       labels:
         app: apollo
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: spi-mpic
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - spi-mpic
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - mx6qmpic
       containers:
       - name: apollo
         image: docker.io/loulou3333444/fibonacci_bench@sha256:4c95ccbb0373d303e78c7c1b030efdb304b87c01d686bab672f1e769df13541b
